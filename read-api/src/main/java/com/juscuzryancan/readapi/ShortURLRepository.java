@@ -1,6 +1,5 @@
-package com.juscuzryancan.dao;
+package com.juscuzryancan.readapi;
 
-import com.juscuzryancan.entity.ShortURL;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ShortURLRepository extends  JpaRepository<ShortURL, String>{
