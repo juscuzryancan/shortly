@@ -1,4 +1,4 @@
-package com.juscuzryancan.readapi;
+package com.juscuzryancan.redirectservice;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

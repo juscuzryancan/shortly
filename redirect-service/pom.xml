@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.juscuzryancan</groupId>
-	<artifactId>read-api</artifactId>
+	<artifactId>redirect-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>read-api</name>
 	<description>Reads the short urls</description>

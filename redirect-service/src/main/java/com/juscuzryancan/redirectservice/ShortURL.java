@@ -1,4 +1,4 @@
-package com.juscuzryancan.readapi;
+package com.juscuzryancan.redirectservice;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

@@ -1,4 +1,4 @@
-package com.juscuzryancan.readapi;
+package com.juscuzryancan.redirectservice;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

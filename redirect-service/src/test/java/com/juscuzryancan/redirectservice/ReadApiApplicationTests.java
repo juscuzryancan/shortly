@@ -1,4 +1,4 @@
-package com.juscuzryancan.readapi;
+package com.juscuzryancan.redirectservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
