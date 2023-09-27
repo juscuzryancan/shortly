@@ -26,6 +26,7 @@
         <module>
            redirect-service
         </module>
+        <module>shortener-service</module>
     </modules>
 
     <dependencies>
