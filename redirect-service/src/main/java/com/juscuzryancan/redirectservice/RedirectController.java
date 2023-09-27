@@ -5,19 +5,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
-import java.util.NoSuchElementException;
-
 @RestController
 @RequestMapping("/api/v1/")
-public class ReadController {
+public class RedirectController {
 
     @GetMapping("/{shortLink}")
-    public RedirectView getRedirect(@RequestParam String shortLink) {
-//        if (/*shortlink is not found */) {
-//            //throw not found and return 404
-//            return ResponseEntity.notFound().build();
-//        }
-
+    public RedirectView getRedirect(@PathVariable("shortLink") String shortLink) {
         return new RedirectView("https://www.google.com");
     }
 
