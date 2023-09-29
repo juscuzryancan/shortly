@@ -2,6 +2,7 @@ package com.juscuzryancan.urlservice.controller;
 
 import com.juscuzryancan.urlservice.dto.ShortURLRequest;
 import com.juscuzryancan.urlservice.service.URLShortenerService;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ public class ShortURLController {
     }
 
     @GetMapping("/shortURL/{shortURL}")
+    @Cacheable(key = "#shortURL", value = "shortURL")
     public RedirectView redirect(@PathVariable("shortURL") String shortURL) {
         String URL = shortenerService.getOriginalLink(shortURL);
         return new RedirectView(URL);
