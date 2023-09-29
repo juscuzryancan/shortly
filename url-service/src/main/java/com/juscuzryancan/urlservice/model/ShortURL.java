@@ -1,12 +1,15 @@
 package com.juscuzryancan.urlservice.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Timestamp;
+import java.time.OffsetDateTime;
 
 @Entity
 @Data
@@ -16,9 +19,11 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 public class ShortURL {
     @Id
+    @Column(length = 7)
     private String shortLink;
     private int expiration;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Timestamp createdAt;
+    @Column(columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    private OffsetDateTime createdAt;
     private String originalLink;
+    private int clicks;
 }
