@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 @Service
@@ -26,29 +27,17 @@ public class URLShortenerService {
         return shortURL.getOriginalLink();
     }
 
+    /*
+    TODO:
+        add expiration check
+     */
     public String createShortURL(String originalLink) throws NoSuchAlgorithmException {
         ShortURL url = repository.findByOriginalLink(originalLink);
         if (url != null) {
             log.info("Found Existing shortURL: {}", url.getOriginalLink());
             return url.getShortLink();
         }
-
-        byte[] messageDigest =  md.digest(originalLink.getBytes());
-        /*
-         TODO:
-          add salt when the messageDigest is
-          md.update(salt);
-          byte[] salt = new byte[16];
-          SecureRandom.getInstanceStrong().nextBytes(salt);
-         */
-        String shortLink = new String(
-                Base62.createInstance().encode(messageDigest),
-                StandardCharsets.UTF_8
-        ).substring(0, 7);
-        /*
-        TODO:
-            add expiration check
-         */
+        String shortLink = encode(originalLink);
         ShortURL shortURL = ShortURL.builder()
                 .expiration(30)
                 .createdAt(OffsetDateTime.now(ZoneOffset.UTC))
@@ -57,6 +46,22 @@ public class URLShortenerService {
                 .build();
         repository.save(shortURL);
         log.info("Short URL Created -- OriginalURL: {}", originalLink);
+        return shortLink;
+    }
+
+    private String encode(String originalLink) throws NoSuchAlgorithmException {
+        byte[] messageDigest =  md.digest(originalLink.getBytes());
+        String shortLink;
+        ShortURL dupe;
+        do  {
+            byte[] salt = new byte[16];
+            SecureRandom.getInstanceStrong().nextBytes(salt);
+            shortLink = new String(
+                    Base62.createInstance().encode(messageDigest),
+                    StandardCharsets.UTF_8
+            ).substring(0, 7);
+            dupe = repository.findByShortLink(shortLink);
+        } while (dupe != null);
         return shortLink;
     }
 }
