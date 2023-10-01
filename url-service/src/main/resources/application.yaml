@@ -1,4 +1,6 @@
 spring:
+  application:
+    NAME: url-service
   datasource:
     url: jdbc:postgresql://localhost:5432/shortly
     username:
@@ -6,8 +8,14 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create-drop
-    show-sql: true
+    show-sql: false #true
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
+server:
+  port: 0
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
