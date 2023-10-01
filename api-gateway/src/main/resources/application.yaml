@@ -1,0 +1,22 @@
+spring:
+  application:
+    NAME: api-gateway
+
+  cloud:
+    gateway:
+      routes:
+        # URL Service Route
+        - id: url-service
+          uri: lb://url-service
+          predicates:
+            - Path=/api/v1/data/shorten, /api/v1/shortURL/{shortURL}
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+logging:
+  level:
+    org.springframework.cloud.gateway: TRACE
+    org.springframework.cloud.gateway.route.RouteDefinitionLocator: INFO
+    root: INFO
+
