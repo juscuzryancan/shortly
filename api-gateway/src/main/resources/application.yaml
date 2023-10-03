@@ -1,7 +1,6 @@
 spring:
   application:
     NAME: api-gateway
-
   cloud:
     gateway:
       routes:
@@ -17,6 +16,11 @@ spring:
         - id: eureka-server-static
           uri: http://localhost:8761
           predicates: Path=/eureka/**
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8181/realms/shortly-realm
 eureka:
   client:
     serviceUrl:
