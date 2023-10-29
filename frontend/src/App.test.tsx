@@ -1,5 +1,7 @@
-import { expect, test } from 'vitest';
+import { test } from 'vitest';
+import { render } from '@testing-library/react'
+import App from './App';
 
 test('hello', () => {
-  expect(1).toBe(1);
+  render(<App />)
 })
